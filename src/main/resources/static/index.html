@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Minesweeper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+ <h1>Minesweeper</h1>
+ <form method="post" action="http://localhost:8080/">
+
+              <p>Enter your name:</p>
+             <p><input name="textfield" type="text" value="Player" autocomplete="off"></p>
+             <p>Select size of field</p>
+               <div>
+                 <input type="radio" id="small"
+                  name="sizeCode" value="small" checked>
+                 <label for="contactChoice1">Small</label>
+
+                 <input type="radio" id="medium"
+                  name="sizeCode" value="medium">
+                 <label for="medium">Medium</label>
+
+                 <input type="radio" id="large"
+                  name="sizeCode" value="large">
+                 <label for="contactChoice3">Large</label>
+               </div>
+               <div>
+                     <p></p>
+                 <button type="submit">Game</button>
+                  <button type="reset">   Reset</button>
+               </div>
+         </form>
+</body>
+</html>
