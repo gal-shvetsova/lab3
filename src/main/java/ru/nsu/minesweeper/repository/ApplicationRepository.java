@@ -16,9 +16,11 @@ public class ApplicationRepository {
     }
 
 
-    public UUID createSession(String sizeCode){
+
+
+    public UUID createSession(int fieldHeight, int fieldWidth, int bombsCount, String player){
         UUID sessionId = UUID.randomUUID();
-        sessionMap.put(sessionId, new Session(sessionId, sizeCode));
+        sessionMap.put(sessionId, new Session(sessionId, fieldHeight, fieldWidth, bombsCount, player));
         return sessionId;
     }
 }

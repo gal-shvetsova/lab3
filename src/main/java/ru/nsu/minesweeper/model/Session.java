@@ -4,9 +4,14 @@ import java.util.UUID;
 
 public class Session {
     private UUID sessionID;
-    private String sizeCode;
+    private String sizeCode;  //TODO: убрать sizeCode добавить значения ширины высоты и мин
 
-    public Session(UUID sessionID, String sizeCode) {
+    private int fieldHeight;
+    private int fieldWidth;
+    private int bombsCount;
+    private String player;
+
+    public Session(UUID sessionID, int fieldHeight, int fieldWidth, int bombsCount, String player) {
         this.sessionID = sessionID;
         this.sizeCode = sizeCode;
     }

@@ -1,21 +1,21 @@
 <!DOCTYPE HTML>
 <html>
-<head>
+<link>
     <title>Minesweeper</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-     <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
  <h1>Minesweeper</h1>
- <form method="post" action="http://localhost:8080/">
 
+ <div class="menu">
               <p>Enter your name:</p>
-             <p><input name="textfield" type="text" value="Player" autocomplete="off"></p>
+             <p><input name="player" type="text" value="Player" autocomplete="off"></p>
              <p>Select size of field</p>
-               <div>
                  <input type="radio" id="small"
                   name="sizeCode" value="small" checked>
-                 <label for="contactChoice1">Small</label>
+                 <label for="small">Small</label>
 
                  <input type="radio" id="medium"
                   name="sizeCode" value="medium">
@@ -23,13 +23,26 @@
 
                  <input type="radio" id="large"
                   name="sizeCode" value="large">
-                 <label for="contactChoice3">Large</label>
-               </div>
-               <div>
-                     <p></p>
-                 <button type="submit">Game</button>
-                  <button type="reset">   Reset</button>
-               </div>
-         </form>
+                 <label for="large">Large</label>
+
+                 <input type="radio" id="custom"
+                        name="sizeCode" value="custom">
+                 <label for="custom">Custom</label>
+     <div class="customSize">
+     <p>Enter height and width:</p>
+     <p><input name="height" type="text" value="15" autocomplete="off"></p>
+         <p><input name="width" type="text" value="15" autocomplete="off"></p>
+         <p><input name="bombs" type="text" value="10" autocomplete="off"></p>
+     </div>
+                 <button id="start">Game</button>
+                  <button type="reset">Reset</button>
+ </div>
+
+ <div class="game">
+     <p>Enter height and width:</p>
+     <button id="back">Back</button>
+
+ </div>
 </body>
+<script src="main.js" type="text/javascript" ></script>
 </html>
