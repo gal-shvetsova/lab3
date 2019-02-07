@@ -33,6 +33,7 @@ function(){
            }),
            success: function(data){
           $('.menu').hide(400);
+          $('.game').show();
            },
          contentType : "application/json"
        });}
@@ -46,8 +47,8 @@ function(){
 
        $.ajax({
            success: function(data){
-        //    $('.menu').css('style.display', 'block');
-          // $('.game').css('style.display', 'none');
+        $('.menu').show(400);
+          $('.game').hide();
            },
        });}
 
