@@ -7,36 +7,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
- <h1>Minesweeper</h1>
+    <h1>Minesweeper</h1>
+    <div class="menu">
+        <p>Enter your name:</p>
+        <p><input name="player" type="text" value="Player" autocomplete="off"></p>
 
- <div class="menu">
-              <p>Enter your name:</p>
-             <p><input name="player" type="text" value="Player" autocomplete="off"></p>
-             <p>Select size of field</p>
-                 <input type="radio" id="small"
-                  name="sizeCode" value="small" checked>
-                 <label for="small">Small</label>
+        <p>Select size of field</p>
 
-                 <input type="radio" id="medium"
-                  name="sizeCode" value="medium">
-                 <label for="medium">Medium</label>
+        <input type="radio" id="small"
+               name="sizeCode" value="small" checked>
+        <label for="small">Small</label>
 
-                 <input type="radio" id="large"
-                  name="sizeCode" value="large">
-                 <label for="large">Large</label>
+        <input type="radio" id="medium"
+               name="sizeCode" value="medium">
+        <label for="medium">Medium</label>
 
-                 <input type="radio" id="custom"
-                        name="sizeCode" value="custom">
-                 <label for="custom">Custom</label>
-     <div class="customSize">
-     <p class="customSize">Enter height and width:</p>
-     <p><input name="height" type="text" value="15" autocomplete="off"></p>
-         <p><input name="width" type="text" value="15" autocomplete="off"></p>
-         <p><input name="bombs" type="text" value="10" autocomplete="off"></p>
-     </div>
-                 <button id="start">Game</button>
-                  <button type="reset">Reset</button>
- </div>
+        <input type="radio" id="large"
+               name="sizeCode" value="large">
+        <label for="large">Large</label>
+
+        <input type="radio" id="custom"
+               name="sizeCode" value="custom">
+        <label for="custom">Custom</label>
+
+        <div class="customSize">
+            <p class="customSize">Enter height and width:</p>
+            <p><input name="height" type="text" value="15" autocomplete="off"></p>
+            <p><input name="width" type="text" value="15" autocomplete="off"></p>
+            <p><input name="bombs" type="text" value="10" autocomplete="off"></p>
+        </div>
+
+        <button id="start">Game</button>
+        <button type="reset">Reset</button>
+    </div>
 
  <div class="game">
      <p>Enter height and width:</p>
