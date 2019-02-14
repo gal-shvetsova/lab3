@@ -1,4 +1,4 @@
-        var height, width, bombs, ID;
+var height, width, bombs, ID, field, flag = 0;
 $("#start").click(
 
     function(){
@@ -38,7 +38,9 @@ $("#start").click(
             playerName : $("#player").value
             }),
         success: function(data){
-            window.ID = data;
+
+            window.ID = data.sessionID;
+            alert(window.ID);
             $('.menu').hide(400);
             $('.game').show();
             },
@@ -57,7 +59,7 @@ function(){
 
 function init() {
     var $table = $('<table/>');
-
+    window.flag = 2;
     for (var i = 0; i < width; i++) {
         var $row = $('<tr/>');
 
@@ -75,7 +77,10 @@ function init() {
                     default:
                         clickType = 0; //open
                 }
-
+                if (window.flag) {
+                    clickType = window.flag;
+                    window.flag = 0;
+                    }
                  $.ajax({
                     type: "POST",
                     url: "/select",
@@ -83,9 +88,9 @@ function init() {
                         state : $(event.target).data(),
                         sessionID : window.ID
                         }),
-                    success: function(data){
+                    success: function(data, table){
                     //render(data);
-                        alert(data);
+                        alert(data.state);
                         },
                     contentType : "application/json"
                     });
@@ -103,7 +108,17 @@ function init() {
 }
 
 
-function render(data) {
+function render(data, myTable) {
 
+    for (var i = 0; i < width; i++) {
+            for (var j = 0; j < height; j++) {
+                $col.data({x:i,y:j});
+               // if (data.field[i][j] == 9) {
+                    table.eq(i).find('td').eq(j).addClass(data.field[i][j]);
+              //  }
+                //if (data.field[i][j] == 0)
+                    //$col.addClass("zero");
+            }
+    }
 }
 

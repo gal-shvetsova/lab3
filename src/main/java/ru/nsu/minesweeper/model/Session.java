@@ -9,6 +9,8 @@ public class Session {
     private int fieldWidth;
     private int bombsCount;
     private String player;  //TODO убрать имя игрока и спрашивать его в конце
+    private boolean gaming;
+
 
     private int[][] field;
     private cellType[][] playerField;
@@ -22,12 +24,15 @@ public class Session {
         this.bombsCount = bombsCount;
         this.bombsCount = 0;
         this.player = player;
+        this.gaming = false;
         this.field = new int[fieldWidth][fieldHeight]; //TODO check void
         this.playerField = new cellType[fieldWidth][fieldHeight]; //TODO check void
         ArrayHelper.cleanArray(field, fieldWidth, fieldHeight);
         ArrayHelper.cleanArray(playerField, fieldWidth, fieldHeight);
     }
 
+    public boolean isGaming() { return gaming; }
+    public void startGame() { gaming = !gaming; }
     public UUID getSessionID() {
         return sessionID;
     }
@@ -49,6 +54,7 @@ public class Session {
     }
 
     public cellType[][] getField() {
+      //  for (int i = 0; i < )
         return playerField;
     }
 

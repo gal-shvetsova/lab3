@@ -17,10 +17,10 @@ public class ApplicationRepository {
         this.sessionMap = new HashMap<>();
     }
 
-    public String createSession(int fieldHeight, int fieldWidth, int bombsCount, String player){
+    public UUID createSession(int fieldHeight, int fieldWidth, int bombsCount, String player){
         UUID sessionID = UUID.randomUUID();
         sessionMap.put(sessionID.toString(), new Session(sessionID, fieldHeight, fieldWidth, bombsCount, player));
-        return sessionID.toString();
+        return sessionID;
     }
 
     public Session getSession(String sessionID) {

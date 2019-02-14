@@ -23,19 +23,25 @@ public class ApplicationService {
     }
 
     public StartResponse start(StartRequest startRequest) {
-        String sessionId = repository.createSession(startRequest.getFieldHeight(), startRequest.getFieldWidth(),
+        UUID sessionId = repository.createSession(startRequest.getFieldHeight(), startRequest.getFieldWidth(),
                 startRequest.getBombsCount(), startRequest.getPlayer());
 
-        return new StartResponse(sessionId);
+        return new StartResponse(sessionId.toString());
     }
 
     public SelectResponse select(SelectRequest selectRequest) {
         int x = selectRequest.getX(), y = selectRequest.getY();
         Session session = repository.getSession(selectRequest.getSessionID());
 
+        if (!session.isGaming()) {
+            session.init(x, y);
+            session.startGame();
+            return new SelectResponse("game", session.getField());
+        }
         if (session.isLose(x, y)) {
             return new SelectResponse("lose", session.getField());
         }
+
 
         if (selectRequest.getTypeClick() == 0)
             session.open(x, y);
