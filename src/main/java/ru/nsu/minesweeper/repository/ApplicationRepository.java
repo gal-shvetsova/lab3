@@ -7,20 +7,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+//TODO добавить рекорды
+
 @Repository
 public class ApplicationRepository {
-    Map<UUID, Session> sessionMap;
+    Map<String, Session> sessionMap;
 
     public ApplicationRepository() {
         this.sessionMap = new HashMap<>();
     }
 
+    public String createSession(int fieldHeight, int fieldWidth, int bombsCount, String player){
+        UUID sessionID = UUID.randomUUID();
+        sessionMap.put(sessionID.toString(), new Session(sessionID, fieldHeight, fieldWidth, bombsCount, player));
+        return sessionID.toString();
+    }
 
-
-
-    public UUID createSession(int fieldHeight, int fieldWidth, int bombsCount, String player){
-        UUID sessionId = UUID.randomUUID();
-        sessionMap.put(sessionId, new Session(sessionId, fieldHeight, fieldWidth, bombsCount, player));
-        return sessionId;
+    public Session getSession(String sessionID) {
+        return sessionMap.get(sessionID);
     }
 }

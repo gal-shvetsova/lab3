@@ -1,4 +1,4 @@
-        var height, width, bombs;
+        var height, width, bombs, ID;
 $("#start").click(
 
     function(){
@@ -38,6 +38,7 @@ $("#start").click(
             playerName : $("#player").value
             }),
         success: function(data){
+            window.ID = data;
             $('.menu').hide(400);
             $('.game').show();
             },
@@ -69,25 +70,26 @@ function init() {
             $col.mousedown(function(event) {
                 switch (event.which) {
                     case 3:
-                        clickType = 'mark';
+                        clickType = 1;  //mark
                         break;
                     default:
-                        clickType = 'open';
+                        clickType = 0; //open
                 }
 
-
-
-
                  $.ajax({
-                                    type: "POST",
-                                    url: "/select",
-                                    data: JSON.stringify($(event.target).data()),
-                                    success: function(data){
-                                            //render(data);
-                                        },
-                                    contentType : "application/json"
-                                   });
-                                   return false;
+                    type: "POST",
+                    url: "/select",
+                    data: JSON.stringify({
+                        state : $(event.target).data(),
+                        sessionID : window.ID
+                        }),
+                    success: function(data){
+                    //render(data);
+                        alert(data);
+                        },
+                    contentType : "application/json"
+                    });
+                    //return false;
             });
 
 
@@ -101,7 +103,7 @@ function init() {
 }
 
 
-function onLeftClick() {
+function render(data) {
 
 }
 
