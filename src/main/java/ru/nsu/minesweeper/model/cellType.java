@@ -13,7 +13,9 @@ public enum cellType {
     CLOSED,
     FLAGED,
     QUESTION,
-    MINED;
+    MINED,
+    NOTMINED,
+    DIEMINED;
 
     public static cellType toCellType(int number) {
         switch (number) {
@@ -43,6 +45,10 @@ public enum cellType {
                 return QUESTION;
             case 12:
                 return MINED;
+            case 13:
+                return NOTMINED;
+            case 14:
+                return DIEMINED;
             default:
                 return ZERO;
         }

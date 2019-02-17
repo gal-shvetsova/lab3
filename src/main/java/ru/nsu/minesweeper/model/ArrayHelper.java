@@ -25,7 +25,7 @@ public class ArrayHelper {
             do {
                 tempX = (int) (Math.random() * width);
                 tempY = (int) (Math.random() * height);
-            } while (array[tempX][tempY] == 0 || exceptX == tempX && exceptY == tempY);
+            } while (array[tempX][tempY] != 0 || exceptX == tempX && exceptY == tempY);
             array[tempX][tempY] = cellType.MINED.ordinal();
         }
     }
@@ -62,6 +62,7 @@ public class ArrayHelper {
     public static void checkEnvironment(int[][] array, int width, int height) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
+                if (array[i][j] != cellType.MINED.ordinal())
                 array[i][j] = checkCell(array, i, j, width, height);
             }
         }

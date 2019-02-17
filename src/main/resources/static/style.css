@@ -2,3 +2,52 @@
 .game{
     display:none;
 }
+
+.CLOSED {
+    color : green;
+background-image: url('http://xn--80a4adb6f.com/media/t-3.png');
+}
+.ZERO{
+background-image: url('http://xn--80a4adb6f.com/media/t0.png');
+}
+.ONE {
+    background-image: url('http://xn--80a4adb6f.com/media/t1.png');
+}
+.TWO {
+background-image: url('http://xn--80a4adb6f.com/media/t2.png');
+}
+.THREE{
+background-image: url('http://xn--80a4adb6f.com/media/t3.png');
+}
+.FOUR {
+background-image: url('http://xn--80a4adb6f.com/media/t4.png');
+}
+.FIVE{
+background-image: url('http://xn--80a4adb6f.com/media/t5.png');
+}
+.SIX{
+background-image: url('http://xn--80a4adb6f.com/media/t6.png');
+}
+.SEVEN {
+background-image: url('http://xn--80a4adb6f.com/media/t7.png');
+}
+.EIGHT {
+background-image: url('http://xn--80a4adb6f.com/media/t8.png');
+}
+.MINED {
+background-image: url('http://xn--80a4adb6f.com/media/t-2.png');
+}
+.FLAGED {
+background-image: url('http://xn--80a4adb6f.com/media/t-4.png');
+}
+.QUESTION {
+background-image: url('http://xn--80a4adb6f.com/media/t-6.png');
+}
+
+.NOTMINED {
+background-image: url('http://xn--80a4adb6f.com/media/t-5.png');
+}
+
+.DIEMINED {
+background-image: url('http://xn--80a4adb6f.com/media/t-2.png');
+}

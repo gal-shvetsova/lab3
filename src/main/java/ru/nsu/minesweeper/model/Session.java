@@ -22,7 +22,6 @@ public class Session {
         this.fieldHeight = fieldHeight;
         this.fieldWidth = fieldWidth;
         this.bombsCount = bombsCount;
-        this.bombsCount = 0;
         this.player = player;
         this.gaming = false;
         this.field = new int[fieldWidth][fieldHeight]; //TODO check void
@@ -54,7 +53,6 @@ public class Session {
     }
 
     public cellType[][] getField() {
-      //  for (int i = 0; i < )
         return playerField;
     }
 
@@ -63,13 +61,21 @@ public class Session {
         ArrayHelper.checkEnvironment(field, fieldWidth, fieldHeight);
     }
 
+    public void loosing(int x, int y) {  //TODO make different images
+        for (int i = 0; i < fieldWidth; i++) {
+            for (int j = 0; j < fieldHeight; j++) {
+                if (playerField[i][j] == cellType.FLAGED && field[i][j] != cellType.MINED.ordinal())
+                    playerField[i][j] = cellType.NOTMINED;
+                else
+                    playerField[i][j] = cellType.toCellType(field[i][j]);
+            }
+        }
+        playerField[x][y] = cellType.DIEMINED;
+    }
+
     public boolean isLose(int x, int y) {
         if (field[x][y] == cellType.MINED.ordinal()) {
-            for (int i = 0; i < fieldHeight; i++) {
-                for (int j = 0; j < fieldWidth; j++) {
-                    playerField[i][j] = cellType.valueOf(Integer.toString(field[i][j]));
-                }
-            }
+            loosing(x, y);
             return true;
         }
         return false;
@@ -90,6 +96,8 @@ public class Session {
     }
 
     public void open(int x, int y) {
+        if (playerField[x][y] != cellType.CLOSED)
+            return;
         if (field[x][y] != 0 && field[x][y] <= 8) {
             playerField[x][y] = cellType.toCellType(field[x][y]);
         }
@@ -124,7 +132,7 @@ public class Session {
 
     public void mark(int x, int y) {
         switch (playerField[x][y]) {
-            case ZERO:
+            case CLOSED:
                 playerField[x][y] = cellType.FLAGED;
                 break;
             case FLAGED:

@@ -1,28 +1,28 @@
-var height, width, bombs, ID, field, flag = 0;
+var height, width, bombs, ID, field, flag = 0, table;
 $("#start").click(
 
     function(){
         var radioValue = $("input[name='sizeCode']:checked").val();
         switch(radioValue) {
         case "small":
-            height = 8;
-            width = 8;
-            bombs = 10;
+            window.height = 8;
+            window.width = 8;
+            window.bombs = 10;
             break;
         case "medium":
-            height = 16;
-            width = 16;
-            bombs = 40;
+            window.height = 16;
+            window.width = 16;
+            window.bombs = 40;
             break;
         case "large":
-            height = 16;
-            width = 30;
-            bombs = 99;
+            window.height = 16;
+            window.width = 30;
+            window.bombs = 99;
             break;
         case "custom":
-            height = $("#height").value;
-            width = $("#width").value;
-            bombs = $("#bombs").value;
+            window.height = $("#height").value;
+            window.width = $("#width").value;
+            window.bombs = $("#bombs").value; //TODO make it work
             break;
        }
 
@@ -32,10 +32,9 @@ $("#start").click(
         type: "POST",
         url: "/start",
         data: JSON.stringify({
-            fieldHeight : height,
-            fieldWidth : width,
-            bombsCount : bombs,
-            playerName : $("#player").value
+            fieldHeight : window.height,
+            fieldWidth : window.width,
+            bombsCount : window.bombs,
             }),
         success: function(data){
 
@@ -58,39 +57,45 @@ function(){
     );
 
 function init() {
+    $("#playerField").remove();
     var $table = $('<table/>');
+    $table.attr('id', "playerField");
     window.flag = 2;
     for (var i = 0; i < width; i++) {
         var $row = $('<tr/>');
 
         for (var j = 0; j < height; j++) {
-            var $col = $('<td>0<td/>');
+            var $col = $('<td>');
             $col.data({x:i,y:j});
-            $col.addClass("empty");
+            $col.addClass("CLOSED");
+            $col.attr('height', 15);
+            $col.attr('width', 15);
+            $col.attr('id',  String(i) + String(j));
             var clickType;
 
             $col.mousedown(function(event) {
                 switch (event.which) {
+                    case 1:
+                        clickType = 1;  //open
+                        break;
                     case 3:
-                        clickType = 1;  //mark
+                        clickType = 0; //mark
                         break;
                     default:
-                        clickType = 0; //open
+                    clickType = 1;
+                    break;
                 }
-                if (window.flag) {
-                    clickType = window.flag;
-                    window.flag = 0;
-                    }
                  $.ajax({
                     type: "POST",
                     url: "/select",
                     data: JSON.stringify({
-                        state : $(event.target).data(),
+                        state : clickType,
+                        x : $(event.target).data().x,
+                        y : $(event.target).data().y,
                         sessionID : window.ID
                         }),
-                    success: function(data, table){
-                    //render(data);
-                        alert(data.state);
+                    success: function(data){
+                        render(data);
                         },
                     contentType : "application/json"
                     });
@@ -105,20 +110,16 @@ function init() {
     }
 
     $('#field').append($table);
+    window.table = $table;
 }
 
 
-function render(data, myTable) {
-
+function render(data) {
     for (var i = 0; i < width; i++) {
             for (var j = 0; j < height; j++) {
-                $col.data({x:i,y:j});
-               // if (data.field[i][j] == 9) {
-                    table.eq(i).find('td').eq(j).addClass(data.field[i][j]);
-              //  }
-                //if (data.field[i][j] == 0)
-                    //$col.addClass("zero");
-            }
+                           //window.table.eq(i).find('td').eq(j).removeClass(window.table.eq(i).find('td').eq(j).attr('class')).addClass(data.field[i][j]); //TODO decompose
+                            $("#" + (String(i) + String(j))).removeClass($("#" + (String(i) + String(j))).attr('class')).addClass(data.field[i][j]);
+                     }
     }
 }
 

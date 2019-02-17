@@ -1,13 +1,15 @@
 package ru.nsu.minesweeper.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
 import ru.nsu.minesweeper.dto.SelectRequest;
 import ru.nsu.minesweeper.dto.SelectResponse;
 import ru.nsu.minesweeper.dto.StartRequest;
 import ru.nsu.minesweeper.dto.StartResponse;
+
 import ru.nsu.minesweeper.model.Session;
+
 import ru.nsu.minesweeper.repository.ApplicationRepository;
 
 import java.util.UUID;
@@ -36,16 +38,17 @@ public class ApplicationService {
         if (!session.isGaming()) {
             session.init(x, y);
             session.startGame();
-            return new SelectResponse("game", session.getField());
-        }
-        if (session.isLose(x, y)) {
-            return new SelectResponse("lose", session.getField());
-        }
-
-
-        if (selectRequest.getTypeClick() == 0)
             session.open(x, y);
-        if (selectRequest.getTypeClick() == 1)
+            return new SelectResponse("game", session.getField  ());
+        }
+
+        if (selectRequest.getState() == 1) {
+            if (session.isLose(x, y)) {
+                return new SelectResponse("lose", session.getField());
+            }
+            session.open(x, y);
+        }
+        if (selectRequest.getState() == 0)
             session.mark(x,y);
 
         if (session.isWin()) {

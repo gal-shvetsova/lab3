@@ -4,7 +4,7 @@ public class SelectRequest {
     private int x;
     private int y;
     private String sessionID;
-    private int typeClick;
+    private int state;
 
     public int getX() {
         return x;
@@ -18,7 +18,7 @@ public class SelectRequest {
         return sessionID;
     }
 
-    public int getTypeClick() {
-        return typeClick;
+    public int getState() {
+        return state;
     }
 }
