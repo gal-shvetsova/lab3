@@ -31,10 +31,10 @@
         <label for="custom">Custom</label>
 
         <div class="customSize">
-            <p class="customSize">Enter height and width:</p>
-            <p><input name="height" type="text" value="15" autocomplete="off"></p>
-            <p><input name="width" type="text" value="15" autocomplete="off"></p>
-            <p><input name="bombs" type="text" value="10" autocomplete="off"></p>
+            <p>Enter height and width:</p>
+            <p><input id="height" name="height" type="text" value="15" autocomplete="off"></p>
+            <p><input id="width" name="width" type="text" value="15" autocomplete="off"></p>
+            <p><input id="bombs" name="bombs" type="text" value="10" autocomplete="off"></p>
         </div>
 
         <button id="start">Game</button>
@@ -43,11 +43,13 @@
     </div>
 
     <div class="game" oncontextmenu="return false;">
-        <p>Enter height and width:</p>
-        <button id="back">Back</button>
-        <div id="field">
 
+        <div id="field">
         </div>
+
+        <p></p>
+        <button id="back">Back</button>
+
     </div>
 
 </body>

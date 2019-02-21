@@ -4,16 +4,16 @@ package ru.nsu.minesweeper.model;
 
 public class ArrayHelper {
     public static void cleanArray(int[][] array, int width, int height) {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 array[i][j] = 0;
             }
         }
     }
 
     public static void cleanArray(cellType[][] array, int width, int height) {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 array[i][j] = cellType.CLOSED;
             }
         }

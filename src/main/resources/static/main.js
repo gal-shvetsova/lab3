@@ -15,14 +15,14 @@ $("#start").click(
             window.bombs = 40;
             break;
         case "large":
-            window.height = 16;
-            window.width = 30;
+            window.height = 30;
+            window.width = 16;
             window.bombs = 99;
             break;
         case "custom":
-            window.height = $("#height").value;
-            window.width = $("#width").value;
-            window.bombs = $("#bombs").value; //TODO make it work
+           window.height = $("#height").attr("value");
+            window.width = $("#width").attr("value");
+            window.bombs = $("#bombs").attr("value");
             break;
        }
 
@@ -99,7 +99,7 @@ function init() {
                         },
                     contentType : "application/json"
                     });
-                    //return false;
+
             });
 
 
