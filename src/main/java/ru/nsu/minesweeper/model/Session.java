@@ -13,7 +13,7 @@ public class Session {
 
 
     private int[][] field;
-    private cellType[][] playerField;
+    private CellType[][] playerField;
 
     private int playerBombs;
 
@@ -25,7 +25,7 @@ public class Session {
         this.player = player;
         this.gaming = false;
         this.field = new int[fieldWidth][fieldHeight]; //TODO check void
-        this.playerField = new cellType[fieldWidth][fieldHeight]; //TODO check void
+        this.playerField = new CellType[fieldWidth][fieldHeight]; //TODO check void
         ArrayHelper.cleanArray(field, fieldWidth, fieldHeight);
         ArrayHelper.cleanArray(playerField, fieldWidth, fieldHeight);
     }
@@ -52,7 +52,7 @@ public class Session {
         return player;
     }
 
-    public cellType[][] getField() {
+    public CellType[][] getField() {
         return playerField;
     }
 
@@ -64,17 +64,17 @@ public class Session {
     public void loosing(int x, int y) {  //TODO make different images
         for (int i = 0; i < fieldWidth; i++) {
             for (int j = 0; j < fieldHeight; j++) {
-                if (playerField[i][j] == cellType.FLAGED && field[i][j] != cellType.MINED.ordinal())
-                    playerField[i][j] = cellType.NOTMINED;
+                if (playerField[i][j] == CellType.FLAGED && field[i][j] != CellType.MINED.ordinal())
+                    playerField[i][j] = CellType.NOTMINED;
                 else
-                    playerField[i][j] = cellType.toCellType(field[i][j]);
+                    playerField[i][j] = CellType.toCellType(field[i][j]);
             }
         }
-        playerField[x][y] = cellType.DIEMINED;
+        playerField[x][y] = CellType.DIEMINED;
     }
 
     public boolean isLose(int x, int y) {
-        if (field[x][y] == cellType.MINED.ordinal()) {
+        if (field[x][y] == CellType.MINED.ordinal()) {
             loosing(x, y);
             return true;
         }
@@ -87,7 +87,7 @@ public class Session {
         }
         for (int i = 0; i < fieldWidth; i++) {
             for (int j = 0; j < fieldHeight; j++) {
-                if (playerField[i][j] == cellType.FLAGED && field[i][j] != cellType.MINED.ordinal()) {
+                if (playerField[i][j] == CellType.FLAGED && field[i][j] != CellType.MINED.ordinal()) {
                     return false;
                 }
             }
@@ -96,13 +96,13 @@ public class Session {
     }
 
     public void open(int x, int y) {
-        if (playerField[x][y] != cellType.CLOSED)
+        if (playerField[x][y] != CellType.CLOSED)
             return;
         if (field[x][y] != 0 && field[x][y] <= 8) {
-            playerField[x][y] = cellType.toCellType(field[x][y]);
+            playerField[x][y] = CellType.toCellType(field[x][y]);
         }
         if (field[x][y] == 0) {
-            playerField[x][y] = cellType.ZERO;
+            playerField[x][y] = CellType.ZERO;
             if (x + 1 < fieldWidth) {
                 open(x + 1, y);
                 if (y + 1 < fieldHeight) {
@@ -133,13 +133,13 @@ public class Session {
     public void mark(int x, int y) {
         switch (playerField[x][y]) {
             case CLOSED:
-                playerField[x][y] = cellType.FLAGED;
+                playerField[x][y] = CellType.FLAGED;
                 break;
             case FLAGED:
-                playerField[x][y] = cellType.QUESTION;
+                playerField[x][y] = CellType.QUESTION;
                 break;
             case QUESTION:
-                playerField[x][y] = cellType.CLOSED;
+                playerField[x][y] = CellType.CLOSED;
             default:
                 break;
         }

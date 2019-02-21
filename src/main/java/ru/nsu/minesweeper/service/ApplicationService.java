@@ -39,7 +39,7 @@ public class ApplicationService {
             session.init(x, y);
             session.startGame();
             session.open(x, y);
-            return new SelectResponse("game", session.getField  ());
+            return new SelectResponse("game", session.getField());
         }
 
         if (selectRequest.getState() == 1) {
@@ -49,7 +49,7 @@ public class ApplicationService {
             session.open(x, y);
         }
         if (selectRequest.getState() == 0)
-            session.mark(x,y);
+            session.mark(x, y);
 
         if (session.isWin()) {
             return new SelectResponse("win", session.getField());

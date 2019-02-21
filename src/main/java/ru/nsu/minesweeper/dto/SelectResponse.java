@@ -1,16 +1,16 @@
 package ru.nsu.minesweeper.dto;
 
-import ru.nsu.minesweeper.model.cellType;
+import ru.nsu.minesweeper.model.CellType;
 
 public class SelectResponse {
     private String state;
-    private cellType field[][];
+    private CellType field[][];
 
     public String getState() {
         return state;
     }
 
-    public cellType[][] getField() {
+    public CellType[][] getField() {
         return field;
     }
 
@@ -18,11 +18,11 @@ public class SelectResponse {
         this.state = state;
     }
 
-    public void setField(cellType[][] field) {
+    public void setField(CellType[][] field) {
         this.field = field;
     }
 
-    public SelectResponse(String state, cellType[][] field) {
+    public SelectResponse(String state, CellType[][] field) {
         this.state = state;
         this.field = field;
     }

@@ -1,8 +1,6 @@
 package ru.nsu.minesweeper.dto;
 
 
-import java.util.UUID;
-
 public class StartResponse {
     private String sessionID;
 

@@ -1,9 +1,7 @@
 package ru.nsu.minesweeper.model;
 
-//TODO check for package-private
-
-public class ArrayHelper {
-    public static void cleanArray(int[][] array, int width, int height) {
+class ArrayHelper {
+    static void cleanArray(int[][] array, int width, int height) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 array[i][j] = 0;
@@ -11,59 +9,59 @@ public class ArrayHelper {
         }
     }
 
-    public static void cleanArray(cellType[][] array, int width, int height) {
+    static void cleanArray(CellType[][] array, int width, int height) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                array[i][j] = cellType.CLOSED;
+                array[i][j] = CellType.CLOSED;
             }
         }
     }
 
-    public static void randomFilling(int[][] array, int width, int height, int elementsCount, int exceptX, int exceptY) {
+    static void randomFilling(int[][] array, int width, int height, int elementsCount, int exceptX, int exceptY) {
         int tempX, tempY;
         for (int i = 0; i < elementsCount; i++) {
             do {
                 tempX = (int) (Math.random() * width);
                 tempY = (int) (Math.random() * height);
             } while (array[tempX][tempY] != 0 || exceptX == tempX && exceptY == tempY);
-            array[tempX][tempY] = cellType.MINED.ordinal();
+            array[tempX][tempY] = CellType.MINED.ordinal();
         }
     }
 
-    public static int checkCell(int[][] array, int x, int y, int width, int height) {
+    static int checkCell(int[][] array, int x, int y, int width, int height) {
         int result = 0;
-        if (x + 1 < width && array[x + 1][y] == cellType.MINED.ordinal()) {
+        if (x + 1 < width && array[x + 1][y] == CellType.MINED.ordinal()) {
             result++;
         }
-        if (x > 0 && array[x - 1][y] == cellType.MINED.ordinal()) {
+        if (x > 0 && array[x - 1][y] == CellType.MINED.ordinal()) {
             result++;
         }
-        if (y + 1 < height && array[x][y + 1] == cellType.MINED.ordinal()) {
+        if (y + 1 < height && array[x][y + 1] == CellType.MINED.ordinal()) {
             result++;
         }
-        if (y > 0 && array[x][y - 1] == cellType.MINED.ordinal()) {
+        if (y > 0 && array[x][y - 1] == CellType.MINED.ordinal()) {
             result++;
         }
-        if (x + 1 < width && y + 1 < height && array[x + 1][y + 1] == cellType.MINED.ordinal()) {
+        if (x + 1 < width && y + 1 < height && array[x + 1][y + 1] == CellType.MINED.ordinal()) {
             result++;
         }
-        if (x + 1 < width && y > 0 && array[x + 1][y - 1] == cellType.MINED.ordinal()) {
+        if (x + 1 < width && y > 0 && array[x + 1][y - 1] == CellType.MINED.ordinal()) {
             result++;
         }
-        if (x > 0 && y + 1 < height && array[x - 1][y + 1] == cellType.MINED.ordinal()) {
+        if (x > 0 && y + 1 < height && array[x - 1][y + 1] == CellType.MINED.ordinal()) {
             result++;
         }
-        if (x > 0 && y > 0 && array[x - 1][y - 1] == cellType.MINED.ordinal()) {
+        if (x > 0 && y > 0 && array[x - 1][y - 1] == CellType.MINED.ordinal()) {
             result++;
         }
         return result;
     }
 
-    public static void checkEnvironment(int[][] array, int width, int height) {
+    static void checkEnvironment(int[][] array, int width, int height) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                if (array[i][j] != cellType.MINED.ordinal())
-                array[i][j] = checkCell(array, i, j, width, height);
+                if (array[i][j] != CellType.MINED.ordinal())
+                    array[i][j] = checkCell(array, i, j, width, height);
             }
         }
     }
