@@ -3,10 +3,7 @@ package ru.nsu.minesweeper.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ru.nsu.minesweeper.dto.SelectRequest;
-import ru.nsu.minesweeper.dto.SelectResponse;
-import ru.nsu.minesweeper.dto.StartRequest;
-import ru.nsu.minesweeper.dto.StartResponse;
+import ru.nsu.minesweeper.dto.*;
 
 import ru.nsu.minesweeper.model.Session;
 
@@ -56,5 +53,11 @@ public class ApplicationService {
         }
 
         return new SelectResponse("game", session.getField());
+    }
+
+    public RecordsResponse getRecords(RecordsRequest recordsRequest) {
+        String size = recordsRequest.getSize();
+        repository.readTable(size);
+        return new RecordsResponse(repository.getTable().getPlayer(), repository.getTable().getRecord());
     }
 }

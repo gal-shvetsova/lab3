@@ -2,10 +2,7 @@ package ru.nsu.minesweeper.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.nsu.minesweeper.dto.SelectRequest;
-import ru.nsu.minesweeper.dto.SelectResponse;
-import ru.nsu.minesweeper.dto.StartRequest;
-import ru.nsu.minesweeper.dto.StartResponse;
+import ru.nsu.minesweeper.dto.*;
 import ru.nsu.minesweeper.service.ApplicationService;
 
 @RestController
@@ -26,5 +23,10 @@ public class ApplicationController {
     @PostMapping(value = "/select")
     public SelectResponse select(@RequestBody SelectRequest data) {
         return service.select(data);
+    }
+
+    @PostMapping(value = "/records")
+    public RecordsResponse getRecords(@RequestBody RecordsRequest data) {
+        return  service.getRecords(data);
     }
 }

@@ -1,4 +1,4 @@
-var height, width, bombs, ID, field, flag = 0, table;
+var height, width, bombs, ID, field, sizeCode, flag = false, table;
 $("#start").click(
 
     function(){
@@ -8,21 +8,25 @@ $("#start").click(
             window.height = 8;
             window.width = 8;
             window.bombs = 10;
+            window.sizeCode = "small";
             break;
         case "medium":
             window.height = 16;
             window.width = 16;
             window.bombs = 40;
+            window.sizeCode = "medium";
             break;
         case "large":
             window.height = 30;
             window.width = 16;
             window.bombs = 99;
+            window.sizeCode = "large";
             break;
         case "custom":
-           window.height = $("#height").attr("value");
-            window.width = $("#width").attr("value");
-            window.bombs = $("#bombs").attr("value");
+            window.height = $(".height").val();
+            window.width = $(".width").val();
+            window.bombs = $(".bombs").val();
+            window.sizeCode = "custom";
             break;
        }
 
@@ -37,14 +41,13 @@ $("#start").click(
             bombsCount : window.bombs,
             }),
         success: function(data){
-
             window.ID = data.sessionID;
-            alert(window.ID);
             $('.menu').hide(400);
             $('.game').show();
             },
         contentType : "application/json"
        });
+
        }
     );
 
@@ -53,14 +56,37 @@ $("#back").click(
 
 function(){
             $('.menu').show(400);
-            $('.game').hide();}
+            $('.game').hide();
+            window.sec = 0;
+            window.flag = false;
+            }
     );
+
+$("#records").click(
+function() {
+
+
+       $.ajax({
+        type: "POST",
+        url: "/records",
+        data: JSON.stringify({
+            size : window.sizeCode,
+            }),
+        success: function(data){
+            showRecords(data);
+            $('.game').hide(400);
+            $('.records').show();
+
+            },
+        contentType : "application/json"
+       });
+}
+);
 
 function init() {
     $("#playerField").remove();
     var $table = $('<table/>');
     $table.attr('id', "playerField");
-    window.flag = 2;
     for (var i = 0; i < width; i++) {
         var $row = $('<tr/>');
 
@@ -117,9 +143,32 @@ function init() {
 function render(data) {
     for (var i = 0; i < width; i++) {
             for (var j = 0; j < height; j++) {
-                           //window.table.eq(i).find('td').eq(j).removeClass(window.table.eq(i).find('td').eq(j).attr('class')).addClass(data.field[i][j]); //TODO decompose
                             $("#" + (String(i) + String(j))).removeClass($("#" + (String(i) + String(j))).attr('class')).addClass(data.field[i][j]);
                      }
     }
+    if (window.flag == false) window.flag = true;
 }
 
+    var sec = 0;
+    function pad ( val ) { return val > 9 ? val : "0" + val; }
+    setInterval( function(){
+        if (window.flag) sec++;
+            $("#seconds").html(pad(sec));
+    }, 1000);
+
+function showRecords(data) {
+
+    $("#playersList").remove;
+    var $ol = $('<ol/>');
+    $ol.attr('id', "playersList");
+    for (var i = 0; i < 5; i++) {
+    $ol.prepend('<li>' + data.players[i] + '</li>');
+    }
+        $('#table').append($ol);
+        var $ol = $('<ol/>');
+        $ol.attr('id', "recordsList");
+        for (var i = 0; i < 5; i++) {
+        $ol.prepend('<li>' + data.records[i] + '</li>');
+        }
+            $('#table').append($ol);  //TODO make it in table and make back button
+}
