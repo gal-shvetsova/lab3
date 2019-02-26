@@ -29,19 +29,19 @@ public class ApplicationService {
     }
 
     public SelectResponse select(SelectRequest selectRequest) {
-        int x = selectRequest.getX(), y = selectRequest.getY();
+        int x = selectRequest.getX(), y = selectRequest.getY(), time = selectRequest.getTime();
         Session session = repository.getSession(selectRequest.getSessionID());
 
         if (!session.isGaming()) {
             session.init(x, y);
             session.startGame();
             session.open(x, y);
-            return new SelectResponse("game", session.getField());
+            return new SelectResponse("game", session.getField(), session.getPlayerBombs());
         }
 
         if (selectRequest.getState() == 1) {
             if (session.isLose(x, y)) {
-                return new SelectResponse("lose", session.getField());
+                return new SelectResponse("lose", session.getField(), session.getPlayerBombs());
             }
             session.open(x, y);
         }
@@ -49,10 +49,13 @@ public class ApplicationService {
             session.mark(x, y);
 
         if (session.isWin()) {
-            return new SelectResponse("win", session.getField());
+            String state = "win";
+            repository.readTable("hh");
+            if (repository.getTable().isRecord(time)) state = "beat";
+            return new SelectResponse(state, session.getField(), session.getPlayerBombs());
         }
 
-        return new SelectResponse("game", session.getField());
+        return new SelectResponse("game", session.getField(), session.getPlayerBombs());
     }
 
     public RecordsResponse getRecords(RecordsRequest recordsRequest) {

@@ -5,6 +5,7 @@ public class SelectRequest {
     private int y;
     private String sessionID;
     private int state;
+    private int time;
 
     public int getX() {
         return x;
@@ -20,5 +21,9 @@ public class SelectRequest {
 
     public int getState() {
         return state;
+    }
+
+    public int getTime() {
+        return time;
     }
 }

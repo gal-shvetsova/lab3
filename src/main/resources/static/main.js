@@ -62,6 +62,14 @@ function(){
             }
     );
 
+$("#backGame").click(
+
+function(){
+            $('.game').show(400);
+            $('.records').hide();
+            }
+);
+
 $("#records").click(
 function() {
 
@@ -76,10 +84,31 @@ function() {
             showRecords(data);
             $('.game').hide(400);
             $('.records').show();
-
             },
         contentType : "application/json"
        });
+}
+);
+
+$("#restart").click(
+function() {
+        window.sec = 0;
+
+        init();
+       $.ajax({
+        type: "POST",
+        url: "/start",
+        data: JSON.stringify({
+            fieldHeight : window.height,
+            fieldWidth : window.width,
+            bombsCount : window.bombs,
+            }),
+        success: function(data){
+                window.ID = data.sessionID;
+            },
+        contentType : "application/json"
+       });
+       window.flag = false;
 }
 );
 
@@ -96,7 +125,7 @@ function init() {
             $col.addClass("CLOSED");
             $col.attr('height', 15);
             $col.attr('width', 15);
-            $col.attr('id',  String(i) + String(j));
+            $col.attr('id',  String(i*height + j));
             var clickType;
 
             $col.mousedown(function(event) {
@@ -118,7 +147,8 @@ function init() {
                         state : clickType,
                         x : $(event.target).data().x,
                         y : $(event.target).data().y,
-                        sessionID : window.ID
+                        sessionID : window.ID,
+                        time : sec
                         }),
                     success: function(data){
                         render(data);
@@ -143,10 +173,12 @@ function init() {
 function render(data) {
     for (var i = 0; i < width; i++) {
             for (var j = 0; j < height; j++) {
-                            $("#" + (String(i) + String(j))).removeClass($("#" + (String(i) + String(j))).attr('class')).addClass(data.field[i][j]);
+                            $("#" + (String(i*height + j))).removeClass($("#" + (String(i*height + j))).attr('class')).addClass(data.field[i][j]);
                      }
     }
     if (window.flag == false) window.flag = true;
+    if (data.state == "lose" || data.state == "win") window.flag = false;
+    if (data.state == "win") win();
 }
 
     var sec = 0;
@@ -157,18 +189,20 @@ function render(data) {
     }, 1000);
 
 function showRecords(data) {
-
     $("#playersList").remove;
-    var $ol = $('<ol/>');
-    $ol.attr('id', "playersList");
+    var $table = $('<table/>');
+    $table.attr('id', "playersList");
     for (var i = 0; i < 5; i++) {
-    $ol.prepend('<li>' + data.players[i] + '</li>');
+        var $row = $('<tr/>');
+        var $col = $('<td>' + String(data.players[i]) + '<td/>');
+        $row.append($col);
+        var $col = $('<td>' + String(data.records[i]) + '<td/>');
+        $row.append($col);
+        $table.append($row);
     }
-        $('#table').append($ol);
-        var $ol = $('<ol/>');
-        $ol.attr('id', "recordsList");
-        for (var i = 0; i < 5; i++) {
-        $ol.prepend('<li>' + data.records[i] + '</li>');
-        }
-            $('#table').append($ol);  //TODO make it in table and make back button
+        $('#table').append($table);
+}
+
+function win(){
+    prompt("Enter your name", "Player");
 }

@@ -5,6 +5,7 @@ import ru.nsu.minesweeper.model.CellType;
 public class SelectResponse {
     private String state;
     private CellType field[][];
+    private int bombs;
 
     public String getState() {
         return state;
@@ -12,6 +13,10 @@ public class SelectResponse {
 
     public CellType[][] getField() {
         return field;
+    }
+
+    public int getBombs() {
+        return bombs;
     }
 
     public void setState(String state) {
@@ -22,8 +27,13 @@ public class SelectResponse {
         this.field = field;
     }
 
-    public SelectResponse(String state, CellType[][] field) {
+    public void setBombs(int bombs) {
+        this.bombs = bombs;
+    }
+
+    public SelectResponse(String state, CellType[][] field, int bombs) {
         this.state = state;
         this.field = field;
+        this.bombs = bombs;
     }
 }

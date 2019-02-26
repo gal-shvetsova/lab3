@@ -22,6 +22,7 @@ public class Session {
         this.fieldHeight = fieldHeight;
         this.fieldWidth = fieldWidth;
         this.bombsCount = bombsCount;
+        this.playerBombs = 0;
         this.player = player;
         this.gaming = false;
         this.field = new int[fieldWidth][fieldHeight]; //TODO check void
@@ -50,6 +51,10 @@ public class Session {
 
     public String getPlayer() {
         return player;
+    }
+
+    public int getPlayerBombs() {
+        return playerBombs;
     }
 
     public CellType[][] getField() {
@@ -82,12 +87,10 @@ public class Session {
     }
 
     public boolean isWin() {
-        if (bombsCount != playerBombs) {
-            return false;
-        }
+        if (playerBombs != bombsCount) return false;
         for (int i = 0; i < fieldWidth; i++) {
             for (int j = 0; j < fieldHeight; j++) {
-                if (playerField[i][j] == CellType.FLAGED && field[i][j] != CellType.MINED.ordinal()) {
+                if ( playerField[i][j] == CellType.CLOSED || playerField[i][j] == CellType.FLAGED && field[i][j] != CellType.MINED.ordinal()) {
                     return false;
                 }
             }
@@ -133,9 +136,11 @@ public class Session {
     public void mark(int x, int y) {
         switch (playerField[x][y]) {
             case CLOSED:
+                playerBombs++;
                 playerField[x][y] = CellType.FLAGED;
                 break;
             case FLAGED:
+                playerBombs--;
                 playerField[x][y] = CellType.QUESTION;
                 break;
             case QUESTION:
