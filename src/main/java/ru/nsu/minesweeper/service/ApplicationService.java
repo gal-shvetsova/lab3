@@ -23,7 +23,7 @@ public class ApplicationService {
 
     public StartResponse start(StartRequest startRequest) {
         UUID sessionId = repository.createSession(startRequest.getFieldHeight(), startRequest.getFieldWidth(),
-                startRequest.getBombsCount(), startRequest.getPlayer());
+                startRequest.getBombsCount());
 
         return new StartResponse(sessionId.toString());
     }

@@ -8,7 +8,6 @@ public class Session {
     private int fieldHeight;
     private int fieldWidth;
     private int bombsCount;
-    private String player;  //TODO убрать имя игрока и спрашивать его в конце
     private boolean gaming;
 
 
@@ -17,13 +16,12 @@ public class Session {
 
     private int playerBombs;
 
-    public Session(UUID sessionID, int fieldHeight, int fieldWidth, int bombsCount, String player) {
+    public Session(UUID sessionID, int fieldHeight, int fieldWidth, int bombsCount) {
         this.sessionID = sessionID;
         this.fieldHeight = fieldHeight;
         this.fieldWidth = fieldWidth;
         this.bombsCount = bombsCount;
         this.playerBombs = 0;
-        this.player = player;
         this.gaming = false;
         this.field = new int[fieldWidth][fieldHeight]; //TODO check void
         this.playerField = new CellType[fieldWidth][fieldHeight]; //TODO check void
@@ -47,10 +45,6 @@ public class Session {
 
     public int getBombsCount() {
         return bombsCount;
-    }
-
-    public String getPlayer() {
-        return player;
     }
 
     public int getPlayerBombs() {

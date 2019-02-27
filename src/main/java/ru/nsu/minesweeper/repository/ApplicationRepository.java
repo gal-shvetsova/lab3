@@ -19,9 +19,9 @@ public class ApplicationRepository {
         this.sessionMap = new HashMap<>();
     }
 
-    public UUID createSession(int fieldHeight, int fieldWidth, int bombsCount, String player){
+    public UUID createSession(int fieldHeight, int fieldWidth, int bombsCount){
         UUID sessionID = UUID.randomUUID();
-        sessionMap.put(sessionID.toString(), new Session(sessionID, fieldHeight, fieldWidth, bombsCount, player));
+        sessionMap.put(sessionID.toString(), new Session(sessionID, fieldHeight, fieldWidth, bombsCount));
         return sessionID;
     }
 

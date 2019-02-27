@@ -164,7 +164,6 @@ function init() {
 
         $table.append($row);
     }
-
     $('#field').append($table);
     window.table = $table;
 }
@@ -189,7 +188,7 @@ function render(data) {
     }, 1000);
 
 function showRecords(data) {
-    $("#playersList").remove;
+    $("#playersList").remove();
     var $table = $('<table/>');
     $table.attr('id', "playersList");
     for (var i = 0; i < 5; i++) {

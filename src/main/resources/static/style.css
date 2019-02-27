@@ -1,16 +1,138 @@
 
 .game{
     display:none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 
 .records{
     display:none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.menu{
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+ a {
+    text-decoration: none;
+      outline: none;
+      display: inline-block;
+      color: #ef552f;
+      padding: 20px 30px;
+      margin: 10px 20px;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background-image: linear-gradient(to right, #efce9e 0%, #efb52f 51%, #efbb2f 100%);
+      background-size: 200% auto;
+      box-shadow: 0 0 20px rgba(0,0,0,.1);
+      transition: .5s;
+    }
+    a:hover {background-position: right center;}
+
+label {
+	cursor: pointer;
+	margin: 10px 10px;
+}
+input[type="radio"] {
+display: none;
+}
+
+.customSize {
+    display : none;
+}
+
+label:before {
+	content: '';
+	display: inline-block;
+	height: 15px;
+	width: 15px;
+	background: #EFCE9E;
+	border-radius: 50%;
+	z-index: 2;
+	transition: box-shadow .4s ease,
+					background .3s ease;
+}
+
+input:checked + label:before {
+	box-shadow: inset 0px 3px 0 2px rgba(239,206,158, 0.8);
+	background: #fff;
+}
+
+.attributes{
+    text-decoration: none;
+    display: inline-block;
+    color: #ef552f;
+    padding: 20px 30px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #efce9e 0%, #efb52f 51%, #efbb2f 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+    transition: .5s;
+    position: relative;
+    left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
 }
 
 
+.buttonsMenu{
+ position: relative;
+    left: 85%;
+    margin-right: -50%;
+        transform: translate(-50%, -50%)
+}
+.name{
+    text-decoration: none;
+    display: inline-block;
+    color: #ef552f;
+    padding: 20px 30px;
+    margin: 20px 20px;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #efce9e 0%, #efb52f 51%, #efbb2f 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+    transition: .5s;
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+.minesweeper{
+ 	height: 100%;
+   margin: 0;
+     height: 100%;
+ width : 100%;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+     background-image: url('https://img2.goodfon.ru/wallpaper/nbig/f/64/voyna-boynya-boy-bitva-vtoraya.jpg');
+     background-repeat: no-repeat;
+       background-attachment: fixed;
+   background-position: center;
+     font-family: 'Montserrat', sans-serif;
+     outline: none;
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     color: #ef552f;
+}
 .CLOSED {
-    color : green;
-background-image: url('http://xn--80a4adb6f.com/media/t-3.png');
+    background-image: url('http://xn--80a4adb6f.com/media/t-3.png');
 }
 .ZERO{
 background-image: url('http://xn--80a4adb6f.com/media/t0.png');
