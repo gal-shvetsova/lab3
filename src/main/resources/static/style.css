@@ -17,10 +17,14 @@
     transform: translate(-50%, -50%)
 }
 
+.reset{
+    display:none;
+}
+
 .menu{
     display: table;
     position: absolute;
-    top: 50%;
+    top: 65%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
@@ -94,7 +98,7 @@ input:checked + label:before {
     box-shadow: 0 0 20px rgba(0,0,0,.1);
     transition: .5s;
     position: relative;
-    left: 50%;
+    left: 43%;
         margin-right: -50%;
         transform: translate(-50%, -50%)
 }
@@ -102,7 +106,7 @@ input:checked + label:before {
 
 .buttonsMenu{
  position: relative;
-    left: 85%;
+    left: 99%;
     margin-right: -50%;
         transform: translate(-50%, -50%)
 }
@@ -118,7 +122,8 @@ input:checked + label:before {
     box-shadow: 0 0 20px rgba(0,0,0,.1);
     transition: .5s;
     position: absolute;
-    left: 50%;
+    left: 48%;
+        letter-spacing: 6px;
     margin-right: -50%;
     transform: translate(-50%, -50%)
 }

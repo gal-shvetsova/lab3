@@ -1,4 +1,5 @@
-var height, width, bombs, ID, field, sizeCode, flag = false, table;
+var height, width, bombs, ID, field, sizeCode, flag = false, table, customFlag = false;
+
 $("#start").click(
 
     function(){
@@ -43,7 +44,7 @@ $("#start").click(
         success: function(data){
             window.ID = data.sessionID;
             $('.menu').hide(400);
-            $('.game').show();
+            $('.game').show(400);
             },
         contentType : "application/json"
        });
@@ -56,7 +57,7 @@ $("#back").click(
 
 function(){
             $('.menu').show(400);
-            $('.game').hide();
+            $('.game').hide(400);
             window.sec = 0;
             window.flag = false;
             }
@@ -66,7 +67,7 @@ $("#backGame").click(
 
 function(){
             $('.game').show(400);
-            $('.records').hide();
+            $('.records').hide(400);
             }
 );
 
@@ -83,19 +84,12 @@ function() {
         success: function(data){
             showRecords(data);
             $('.game').hide(400);
-            $('.records').show();
+            $('.records').show(400);
             },
         contentType : "application/json"
        });
 }
 );
-
-$("#clear").click(
-function() {
-$("input[name='sizeCode']:checked").val("small");
-
-}
-)
 
 $("#restart").click(
 function() {
@@ -212,3 +206,19 @@ function showRecords(data) {
 function win(){
     prompt("Enter your name", "Player");
 }
+
+$('input:radio[id=custom]').on('change', function () {
+    $(".customSize").show(400);
+});
+
+$('input:radio[id=small]').on('change', function () {
+     $(".customSize").hide(400);
+     });
+
+     $('input:radio[id=medium]').on('change', function () {
+          $(".customSize").hide(400);
+          });
+
+          $('input:radio[id=large]').on('change', function () {
+               $(".customSize").hide(400);
+               });
