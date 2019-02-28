@@ -90,6 +90,13 @@ function() {
 }
 );
 
+$("#clear").click(
+function() {
+$("input[name='sizeCode']:checked").val("small");
+
+}
+)
+
 $("#restart").click(
 function() {
         window.sec = 0;
