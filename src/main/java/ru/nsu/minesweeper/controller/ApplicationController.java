@@ -29,4 +29,9 @@ public class ApplicationController {
     public RecordsResponse getRecords(@RequestBody RecordsRequest data) {
         return  service.getRecords(data);
     }
+
+    @PostMapping(value = "/newrecord")
+    public NewRecordResponse addRecord(@RequestBody NewRecordRequest data) {
+        return service.addRecord(data);
+    }
 }

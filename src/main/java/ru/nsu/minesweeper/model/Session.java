@@ -9,14 +9,14 @@ public class Session {
     private int fieldWidth;
     private int bombsCount;
     private boolean gaming;
-
+    private String size;
 
     private int[][] field;
     private CellType[][] playerField;
 
     private int playerBombs;
 
-    public Session(UUID sessionID, int fieldHeight, int fieldWidth, int bombsCount) {
+    public Session(UUID sessionID, int fieldHeight, int fieldWidth, int bombsCount, String  size) {
         this.sessionID = sessionID;
         this.fieldHeight = fieldHeight;
         this.fieldWidth = fieldWidth;
@@ -25,6 +25,7 @@ public class Session {
         this.gaming = false;
         this.field = new int[fieldWidth][fieldHeight]; //TODO check void
         this.playerField = new CellType[fieldWidth][fieldHeight]; //TODO check void
+        this.size = size;
         ArrayHelper.cleanArray(field, fieldWidth, fieldHeight);
         ArrayHelper.cleanArray(playerField, fieldWidth, fieldHeight);
     }
@@ -51,6 +52,10 @@ public class Session {
         return playerBombs;
     }
 
+    public String getSize() {
+        return size;
+    }
+
     public CellType[][] getField() {
         return playerField;
     }
@@ -60,7 +65,7 @@ public class Session {
         ArrayHelper.checkEnvironment(field, fieldWidth, fieldHeight);
     }
 
-    public void loosing(int x, int y) {  //TODO make different images
+    public void loosing(int x, int y) {  //TODO make different media
         for (int i = 0; i < fieldWidth; i++) {
             for (int j = 0; j < fieldHeight; j++) {
                 if (playerField[i][j] == CellType.FLAGED && field[i][j] != CellType.MINED.ordinal())

@@ -1,4 +1,44 @@
-var height, width, bombs, ID, field, sizeCode, flag = false, table, customFlag = false;
+var height, width, bombs, ID, field, sizeCode, flag = "start", table, customFlag = false;
+
+var preloaded_images = [];
+
+var images_to_preload = [
+    "closed.png",
+    "diemined.png",
+    "eight.png",
+    "five.png",
+    "flaged.png",
+    "four.png",
+    "mined.png",
+    "notmined.png",
+    "one.png",
+    "question.png",
+    "seven.png",
+    "six.png",
+    "three.png",
+    "two.png",
+    "zero.png",
+    "d0.png",
+    "d1.png",
+    "d2.png",
+    "d3.png",
+    "d4.png",
+    "d5.png",
+    "d6.png",
+    "d7.png",
+    "d8.png",
+    "d9.png",
+
+];
+
+function preload_images() {
+	for (var i = 0; i<images_to_preload.length; i++) {
+		preloaded_images[i] = new Image();
+		preloaded_images[i].src = "media/" + images_to_preload[i];
+	}
+}
+
+preload_images();
 
 $("#start").click(
 
@@ -59,7 +99,7 @@ function(){
             $('.menu').show(400);
             $('.game').hide(400);
             window.sec = 0;
-            window.flag = false;
+            window.flag = "start";
             }
     );
 
@@ -100,6 +140,7 @@ function() {
         type: "POST",
         url: "/start",
         data: JSON.stringify({
+            size : window.sizeCode,
             fieldHeight : window.height,
             fieldWidth : window.width,
             bombsCount : window.bombs,
@@ -109,7 +150,7 @@ function() {
             },
         contentType : "application/json"
        });
-       window.flag = false;
+       window.flag = "start";
 }
 );
 
@@ -124,8 +165,8 @@ function init() {
             var $col = $('<td>');
             $col.data({x:i,y:j});
             $col.addClass("CLOSED");
-            $col.attr('height', 15);
-            $col.attr('width', 15);
+            $col.attr('height', 24);
+            $col.attr('width', 24);
             $col.attr('id',  String(i*height + j));
             var clickType;
 
@@ -141,6 +182,7 @@ function init() {
                     clickType = 1;
                     break;
                 }
+                if (window.flag == "game" || window.flag == "start"){
                  $.ajax({
                     type: "POST",
                     url: "/select",
@@ -149,13 +191,15 @@ function init() {
                         x : $(event.target).data().x,
                         y : $(event.target).data().y,
                         sessionID : window.ID,
-                        time : sec
+                        time : window.sec
                         }),
                     success: function(data){
                         render(data);
+
                         },
                     contentType : "application/json"
                     });
+                    }
 
             });
 
@@ -176,17 +220,24 @@ function render(data) {
                             $("#" + (String(i*height + j))).removeClass($("#" + (String(i*height + j))).attr('class')).addClass(data.field[i][j]);
                      }
     }
-    if (window.flag == false) window.flag = true;
-    if (data.state == "lose" || data.state == "win") window.flag = false;
-    if (data.state == "win") win();
+    window.flag = data.state;
+    if (data.state == "beat") win();
 }
+
+//timer
 
     var sec = 0;
     function pad ( val ) { return val > 9 ? val : "0" + val; }
     setInterval( function(){
-        if (window.flag) sec++;
-            $("#seconds").html(pad(sec));
+        if (window.flag == "game") sec++;
+        var hun = Math.floor(sec / 100);
+        var ten = Math.floor((sec - hun*100) / 10);
+        var one = Math.floor(sec - hun*100 - ten*10);
+          $("#hundred").removeClass($("#hundred").attr('class')).addClass("d" + String(hun));
+          $("#ten").removeClass($("#ten").attr('class')).addClass("d" + String(ten));
+          $("#one").removeClass($("#one").attr('class')).addClass("d" + String(one));
     }, 1000);
+
 
 function showRecords(data) {
     $("#playersList").remove();
@@ -204,8 +255,23 @@ function showRecords(data) {
 }
 
 function win(){
-    prompt("Enter your name", "Player");
-}
+    name = prompt("Enter your name", "Player");
+    window.flag = "start";
+              $.ajax({
+                        type: "POST",
+                        url: "/newrecord",
+                        data: JSON.stringify({
+                            player : name,
+                            time : window.sec,
+                            size : window.sizeCode
+
+                            }),
+
+                        contentType : "application/json"
+                        });
+                        }
+
+
 
 $('input:radio[id=custom]').on('change', function () {
     $(".customSize").show(400);

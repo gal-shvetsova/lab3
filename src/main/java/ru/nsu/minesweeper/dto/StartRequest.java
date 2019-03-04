@@ -5,6 +5,7 @@ public class StartRequest {
     private int fieldHeight;
     private int fieldWidth;
     private int bombsCount;
+    private String size;
 
     public int getBombsCount() {
         return bombsCount;
@@ -16,5 +17,9 @@ public class StartRequest {
 
     public int getFieldWidth() {
         return fieldWidth;
+    }
+
+    public String getSize() {
+        return size;
     }
 }

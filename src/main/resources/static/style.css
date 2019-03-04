@@ -30,6 +30,40 @@
     transform: translate(-50%, -50%)
 }
 
+.table {
+text-decoration: none;
+    display: inline-block;
+    color: #ef552f;
+    padding: 20px 30px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #efce9e 0%, #efb52f 51%, #efbb2f 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+    transition: .5s;
+    position: relative;
+    left: 43%;
+        margin-right: -50%;
+        transform: translate(-50%, -0%)
+}
+
+.gameField{
+text-decoration: none;
+    display: inline-block;
+    color: #ef552f;
+    padding: 5px 10px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #efce9e 0%, #efb52f 51%, #efbb2f 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+    transition: .5s;
+    position: relative;
+    left: 43%;
+        margin-right: -50%;
+        transform: translate(-50%, -0%)
+}
+
 .startGame{
 display: table;
     position: absolute;
@@ -81,9 +115,37 @@ label:before {
 					background .3s ease;
 }
 
+input[type="number"]{
+width : 60px;
+	text-decoration: none;
+    	border: 0;
+          outline: none;
+          display: inline-block;
+          color: #ef552f;
+          padding: 10px 40px;
+          border-radius: 10px;
+          font-family: 'Montserrat', sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          background : #efce9e;
+          background-size: 200% auto;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input::placeholder {
+  color: #f59982;
+}
+
 input:checked + label:before {
 	box-shadow: inset 0px 3px 0 2px rgba(239,206,158, 0.8);
 	background: #fff;
+}
+
+input:bombs + .help-text::before {
+ content: 'Out of range';
 }
 
 .attributes{
@@ -103,6 +165,16 @@ input:checked + label:before {
         transform: translate(-50%, -50%)
 }
 
+td{
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+     background-repeat: no-repeat;
+     outline: none;
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     color: #ef552f;
+}
 
 .buttonsMenu{
  position: relative;
@@ -146,49 +218,147 @@ input:checked + label:before {
      color: #ef552f;
 }
 .CLOSED {
-    background-image: url('http://xn--80a4adb6f.com/media/t-3.png');
+    background-image: url('media/closed.png');
 }
 .ZERO{
-background-image: url('http://xn--80a4adb6f.com/media/t0.png');
+background-image: url('media/zero.png');
 }
 .ONE {
-    background-image: url('http://xn--80a4adb6f.com/media/t1.png');
+    background-image: url('media/one.png');
 }
 .TWO {
-background-image: url('http://xn--80a4adb6f.com/media/t2.png');
+background-image: url('media/two.png');
 }
 .THREE{
-background-image: url('http://xn--80a4adb6f.com/media/t3.png');
+background-image: url('media/three.png');
 }
 .FOUR {
-background-image: url('http://xn--80a4adb6f.com/media/t4.png');
+background-image: url('media/four.png');
 }
 .FIVE{
-background-image: url('http://xn--80a4adb6f.com/media/t5.png');
+background-image: url('media/five.png');
 }
 .SIX{
-background-image: url('http://xn--80a4adb6f.com/media/t6.png');
+background-image: url('media/six.png');
 }
 .SEVEN {
-background-image: url('http://xn--80a4adb6f.com/media/t7.png');
+background-image: url('media/seven.png');
 }
 .EIGHT {
-background-image: url('http://xn--80a4adb6f.com/media/t8.png');
+background-image: url('media/eight.png');
 }
 .MINED {
-background-image: url('http://xn--80a4adb6f.com/media/t-1.png');
+background-image: url('media/mined.png');
 }
 .FLAGED {
-background-image: url('http://xn--80a4adb6f.com/media/t-4.png');
+background-image: url('media/flaged.png');
 }
 .QUESTION {
-background-image: url('http://xn--80a4adb6f.com/media/t-6.png');
+background-image: url('media/question.png');
 }
 
 .NOTMINED {
-background-image: url('http://xn--80a4adb6f.com/media/t-5.png');
+background-image: url('media/notmined.png');
 }
 
 .DIEMINED {
-background-image: url('http://xn--80a4adb6f.com/media/t-2.png');
+background-image: url('media/diemined.png');
 }
+
+.timer {
+	text-decoration: none;
+    color: #ef552f;
+	width : 60px;
+    margin: auto, 20px;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #efce9e 0%, #efb52f 51%, #efbb2f 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+    left: 47%;
+    top: -5%;
+        letter-spacing: 6px;
+        position : absolute;
+    margin-right: auto%;
+    transform: translate(-50%, -50%)
+}
+
+.d0 {
+    	    background-image: url('media/d0.png');
+    	    background-repeat: no-repeat;
+    	    float: left;
+        width: 13px;
+        height: 30px;
+        position: relative;
+}
+
+.d1 {
+  background-image: url('media/d1.png');
+    	    background-repeat: no-repeat;
+    	    float: left;
+        width: 13px;
+        height: 30px;
+        position: relative;
+}
+.d2 {
+  background-image: url('media/d2.png');
+    	    background-repeat: no-repeat;
+    	    float: left;
+        width: 13px;
+        height: 30px;
+        position: relative;
+}
+.d3 {
+  background-image: url('media/d3.png');
+    	    background-repeat: no-repeat;
+    	    float: left;
+        width: 13px;
+        height: 30px;
+        position: relative;
+}.d4 {
+   background-image: url('media/d4.png');
+     	    background-repeat: no-repeat;
+     	    float: left;
+         width: 13px;
+         height: 30px;
+         position: relative;
+ }
+ .d5 {
+   background-image: url('media/d5.png');
+     	    background-repeat: no-repeat;
+     	    float: left;
+         width: 13px;
+         height: 30px;
+         position: relative;
+ }
+ .d6 {
+   background-image: url('media/d6.png');
+     	    background-repeat: no-repeat;
+     	    float: left;
+         width: 13px;
+         height: 30px;
+         position: relative;
+ }
+ .d7 {
+   background-image: url('media/d7.png');
+     	    background-repeat: no-repeat;
+     	    float: left;
+         width: 13px;
+         height: 30px;
+         position: relative;
+ }.d8 {
+    background-image: url('media/d8.png');
+      	    background-repeat: no-repeat;
+      	    float: left;
+          width: 13px;
+          height: 30px;
+          position: relative;
+  }
+  .d9 {
+    background-image: url('media/d9.png');
+      	    background-repeat: no-repeat;
+      	    float: left;
+          width: 13px;
+          height: 30px;
+          position: relative;
+  }
+

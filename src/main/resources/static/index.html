@@ -33,9 +33,9 @@
 
         <div class="customSize" align="center">
             <p>Enter height and width:</p>
-            <p><input class="height" name="height" type="text" value="" autocomplete="off"></p>
-            <p><input class="width" name="width" type="text"  value="" autocomplete="off"></p>
-            <p><input class="bombs" name="bombs" type="text" value="" autocomplete="off"></p>
+            <p><input class="height" name="height" type="number" value="" min="1" max="50" autocomplete="off" placeholder="height"></p>
+            <p><input class="width" name="width" type="number"  value="" min="1" max="20" autocomplete="off" placeholder="width"></p>
+            <p><input id="bombs" class="bombs" name="bombs" type="number" min="1" max="100" value="" autocomplete="off" placeholder="bombs"></p>
         </div>
         </div>
         <div class="buttonsMenu" align="justify">
@@ -46,16 +46,28 @@
     </div>
 
     <div class="game" oncontextmenu="return false;">
-        <span id="seconds"></span>
-        <div id="field" align="center">
+
+        <div class="timer" align="center">
+            <table id="seconds">
+                <tr>
+                    <td id = "hundred" class = "d0"></td>
+                    <td id = "ten" class = "d0" > </td>
+                    <td id = "one" class = "d0" > </td>
+                </tr>
+            </table>
+        </div>
+        <div class="gameField" id="field" align="center">
+
         </div>
 
         <p></p>
+        <div class="buttonsGame" align="center">
         <a id="back">Back</a> <a id="records">Records</a> <a id="restart">Restart</a>
+        </div>
     </div>
 
     <div class="records" oncontextmenu="return false;">
-        <div id="table" align="center">
+        <div class="table" id="table" align="center">
         </div>
         <p></p>
         <a id="backGame">Back</a>

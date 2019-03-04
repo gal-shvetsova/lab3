@@ -23,7 +23,7 @@ public class ApplicationService {
 
     public StartResponse start(StartRequest startRequest) {
         UUID sessionId = repository.createSession(startRequest.getFieldHeight(), startRequest.getFieldWidth(),
-                startRequest.getBombsCount());
+                startRequest.getBombsCount(), startRequest.getSize());
 
         return new StartResponse(sessionId.toString());
     }
@@ -50,7 +50,7 @@ public class ApplicationService {
 
         if (session.isWin()) {
             String state = "win";
-            repository.readTable("hh");
+            repository.readTable(session.getSize());
             if (repository.getTable().isRecord(time)) state = "beat";
             return new SelectResponse(state, session.getField(), session.getPlayerBombs());
         }
@@ -62,5 +62,14 @@ public class ApplicationService {
         String size = recordsRequest.getSize();
         repository.readTable(size);
         return new RecordsResponse(repository.getTable().getPlayer(), repository.getTable().getRecord());
+    }
+
+    public NewRecordResponse addRecord(NewRecordRequest recordRequest) {
+        String size = recordRequest.getSize();
+        String player = recordRequest.getPlayer();
+        int time = recordRequest.getTime();
+        repository.readTable(size);
+        repository.getTable().addNewRecord(player, time);
+        return new NewRecordResponse("success");
     }
 }
